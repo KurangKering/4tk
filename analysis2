@@ -1,0 +1,12 @@
+Mencari laporan bulanan.
+
+Misalkan mencari Laporan Distribusi Bulan Agustus 2018
+
+ada column : - stock akhir bulan April
+			 - data distribusi bulan Agustus 
+			 - selisih keduanya 
+			 - sock bulan agustus 2018
+
+Mendapatkan stock akhir bulan april = seluruh distribusi di awal bulan agustus sampai saat ini + stock
+
+ 

@@ -1,0 +1,17 @@
+User :	- Administrator 
+		- Anggota / Pegawai Biasa
+		- Kepala Sub Bagian
+		- Supplier
+		- Buyer
+
+0. Anggota bisa melihat daftar permintaan atk pada sub bagian mereka.
+0. anggota bisa menambah form permintaan atk cuma sekali. selagi form nya belum di apa apakan, maka anggota tidak bisa menambah form baru.
+0. anggota bisa merubah isi form sebelum Kabag memparaf. jadi kalau sudah di paraf, anggota tidak bisa rubah lagi.
+1. Anggota mengisi form permintaan atk dengan mengklik tombol permintaan atk baru.
+1. setelah anggota mengisi form, lalu kembali ke halaman permintaan atk, bagi data yang baru diinput berstatus Belum di Proses.  
+2. List form permintaan atk tampil di halaman Permintaan atk user Kepala Sub Bagian.
+3. Kepala Sub Bagian mengecek form nya dengan mengklik detail. muncul modal detail
+4. Jika Kabag menyetujui, kabag pilih paraf, jika tidak kabag pilih tolak. 
+5. kemudian seluruh form permintaan atk yang telah di paraf muncul di halaman distribusi supplier. 
+6. pada hari tertentu supplier mendistribusi dengan memilih tombol distribusi pada salah satu daftar form permintaan atk. lalu muncul halaman yang harus diisi supplier, yaitu jumlah yang di distribusi untuk setiap barang. ada jumlah stok,   
+
