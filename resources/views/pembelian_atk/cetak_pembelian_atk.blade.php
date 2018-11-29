@@ -1,3 +1,7 @@
+@php
+$kota = 'Pekanbaru';
+$tanggal = indonesian_date(now(), 'j F Y');
+@endphp
 <html>
 <head>
 	<style type="text/css">
@@ -8,6 +12,9 @@
 	.title {
 		text-align: center;
 		font-size: 18px;
+		font-weight: bolder;
+		letter-spacing: 1px;
+		text-transform: uppercase;
 	}
 	.table {
 		border-spacing: 0;
@@ -19,6 +26,16 @@
 		border: 1px solid;
 		padding: 5px;
 	}
+	#table-footer {
+		float: right;
+		margin-top: 30px;
+	}
+
+	#table-footer tr, #table-footer td {
+		border: none;
+	}
+	.breakNow { page-break-inside:avoid; }
+
 
 </style>
 </head>
@@ -52,6 +69,19 @@
 				<td class="text-center" style="font-weight: bolder;">{{ rupiah($pembelian->det_pembelian_atk->sum('harga')) }}</td>
 			</tr>
 		</tbody>
+	</table>
+	<table id="table-footer" class="breakNow">
+		<tr>
+			<td>{{ "$kota, $tanggal" }}</td>
+		</tr>
+		<tr>
+			<td style="padding: 25px 0;"></td>
+		</tr>
+		<tr>
+			<td class="text-center">
+				{{ strtoupper(Auth::user()->name) }}
+			</td>
+		</tr>
 	</table>
 </body>
 </html>

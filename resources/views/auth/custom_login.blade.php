@@ -32,7 +32,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="{{ asset('templates/adminlte/index2.html') }}"><b>Logo</b></a>
+      <a href="{{ '' }}"><b>Logo</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

@@ -173,7 +173,7 @@ class LaporanController extends Controller
         $bulanLaporan = Carbon::parse($paramWaktu);
         $akhirBulanLaporan = Carbon::parse($paramWaktu)->endOfMonth();
 
-       
+
         return view('laporan.front_opname', compact('uniqueYear','stockBarangBulanItu', 'tanggalStock', 'arrSeluruhDistribusi', 'arrDistribusiBarang', 'arrPembelianBulanItu', 'bulanLaporan', 'akhirBulanLaporan'));
     }
 
@@ -339,6 +339,8 @@ class LaporanController extends Controller
         $bulanLaporan = Carbon::parse($paramWaktu);
         $akhirBulanLaporan = Carbon::parse($paramWaktu)->endOfMonth();
 
+        // return view('laporan.laporan_bulanan_opname', compact('stockBarangBulanItu', 'tanggalStock', 'arrSeluruhDistribusi', 'arrDistribusiBarang', 'arrPembelianBulanItu', 'bulanLaporan', 'akhirBulanLaporan'));
+        
         $pdf = PDF::setPaper('A4','landscape')->loadView('laporan.laporan_bulanan_opname', compact('stockBarangBulanItu', 'tanggalStock', 'arrSeluruhDistribusi', 'arrDistribusiBarang', 'arrPembelianBulanItu', 'bulanLaporan', 'akhirBulanLaporan'));
         return $pdf->stream();
     }

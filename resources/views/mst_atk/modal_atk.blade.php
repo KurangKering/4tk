@@ -1,4 +1,4 @@
-   <div id="modal-custom">
+   <div id="modal-custom" style="display: none;">
     <div class="box">
       <form  id="frm-atk" class="form-horizontal" method="POST">
         <input type="hidden" name="id" value="" id="id">

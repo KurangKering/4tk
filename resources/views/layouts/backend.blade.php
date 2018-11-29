@@ -44,7 +44,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
     <header class="main-header">
       <a href="{{ asset('templates/adminlte/index2.html') }}" class="logo">
         <span class="logo-mini"><b>A</b>LT</span>
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>ATK</b></span>
       </a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -118,13 +118,13 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
         @yield('content')
       </section>
     </div>
-    <footer class="main-footer">
+    <footer class="main-footer">{{-- 
       <div class="pull-right hidden-xs">
         <b>Version</b> 2.4.0
       </div>
       <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
       reserved.
-    </footer>
+     --}}</footer>
     <script src="{{ asset('templates/adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('templates/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     {{-- <script src="{{ asset('templates/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script> --}}
@@ -143,6 +143,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
     <script src="{{ asset('plugins/pickadate.js-3.5.6/lib/picker.time.js') }}"></script>
     <script src="{{ asset('plugins/pickadate.js-3.5.6/lib/legacy.js') }}"></script>
     <script src="{{ asset('templates/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/convert_rupiah.js') }}"></script>
 
 
     @yield('custom-js')

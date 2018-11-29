@@ -41,7 +41,7 @@ class UserController extends Controller
         $subbidang[0] = "Tidak Ada Sub Bidang";
         $subbidang = $subbidang->sortBy(function($i, $v) {return $v;});
         $roles = Role::pluck('name','name')->all();
-
+        
         $data = User::orderBy('id','DESC')->get();
         return view('users.index',compact('data','roles', 'subbidang'));
     }

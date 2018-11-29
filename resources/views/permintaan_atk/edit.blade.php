@@ -64,7 +64,7 @@ th, td {
 						</select>
 					</div>
 					<div class="col-xs-2">
-						<input id="jumlah" maxlength="5" type="text" class="form-control">
+						<input id="jumlah" maxlength="5" type="number" class="form-control">
 					</div>
 					<div class="col-xs-2">
 						<button id="btn-tambah-barang" class="btn btn-block btn-info" type="button">+</button>

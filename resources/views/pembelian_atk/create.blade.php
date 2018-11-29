@@ -45,7 +45,7 @@ th, td {
 						<input type="file" class="form-control" name="import" id="import" >
 					</div>
 					<div class="form-group">
-						<button type="button" id="btn-import" class="btn btn-flat btn-block">Import</button>
+						<button type="button" id="btn-import" class="btn bg-orange btn-block">Import</button>
 						
 					</div>
 
@@ -82,10 +82,10 @@ th, td {
 									</select>
 								</td>
 								<td class="col-xs-2">
-									<input id="jumlah"  type="text" class="form-control">
+									<input id="jumlah"  type="number" class="form-control">
 								</td>
 								<td class="col-xs-2">
-									<input id="harga"  type="text" class="form-control">
+									<input id="harga"  type="number" class="form-control">
 								</td>
 								<td class="col-xs-2">
 									<button id="btn-tambah-barang" class="btn btn-block btn-info" type="button">+</button>
@@ -140,11 +140,34 @@ th, td {
 	$(function() {
 		
 		$('#btn-import').click(function(e) {
-
+			let $btnImport = $(this);
+			$btnImport.attr('disabled', true);
 			var file_data = $('#import').prop("files")[0];
+			
 			var form_data = new FormData();
 			form_data.append("file", file_data);
 			form_data.append("_token", "{{ csrf_token() }}");
+			var type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+			let error = '';
+			if (!file_data) {
+				error = 'Harap Pilih File';
+			}
+			else if (file_data.type !== type) {
+				error = 'Harap Pilih File Format Excel';
+			}
+			if (error) {
+				swal({
+					icon : 'warning',
+					title : 'Gagal !',
+					text : error,
+					buttons : false,
+					closeOnClickOutside : false,
+					timer : 1000,
+				});
+				$btnImport.attr('disabled', false);
+				return;
+			}
+
 			$.ajax({
 				url: "{{ url('pembelian_atk/import_laporan_kebutuhan') }}",
 				dataType: 'script',
@@ -159,29 +182,54 @@ th, td {
 				response = JSON.parse(res);
 				$.each(response, function(index, val) {
 					if (val.jumlah <= 0 || val.id == '' || val.harga <= 0) return;
-
-					if (checkBarang(arr_barang, val.id) === false && val.id != null && val.jumlah != '')
+					let indexBarang = checkBarang(arr_barang, val.id); 
+					if (indexBarang === false)
 					{
-						arr_barang.push({
-							'id' : val.id,
-							'nama' : val.nama,
-							'jumlah' : val.jumlah,
-							'harga' : val.harga,
-							'satuan' : val.satuan
-						});
+						if (val.id != null && val.jumlah != '') {
+							arr_barang.push({
+								'id' : val.id,
+								'nama' : val.nama,
+								'jumlah' : val.jumlah,
+								'harga' : val.harga,
+								'satuan' : val.satuan
+							});
+						}
+						
 
-						populate_table(arr_barang, content_barang);
+					} else {
+						if (val.id != null && val.jumlah != '') {
+							arr_barang[indexBarang].jumlah = val.jumlah	;
+							arr_barang[indexBarang].harga = val.harga	;
+
+						}
+
 					}
 				});
+				populate_table(arr_barang, content_barang);
 
-
+				swal({
+					icon : 'success',
+					title : 'Berhasil',
+					text : 'Berhasil Import Data',
+					buttons : false,
+					timer : 1000,
+					closeOnClickOutside : false,
+				})
 
 			})
 			.fail(function() {
-				console.log("error");
+				swal({
+					icon : 'warning',
+					title : 'Gagal !',
+					text : 'Harap Periksa Isi File',
+					buttons : false,
+					closeOnClickOutside : false,
+					timer : 1000,
+				});
 			})
 			.always(function() {
-				console.log("complete");
+				$btnImport.attr('disabled', false);
+				
 			});
 
 		})
@@ -226,9 +274,11 @@ th, td {
 		var jumlah = $('#jumlah').val();
 		var harga = $('#harga').val();
 		var satuan = $("#select-barang :selected").data('satuan');
+
 		if (jumlah <= 0 || id == '') return;
 
-		if (checkBarang(arr_barang, id) === false && id != null && jumlah != '')
+		let indexBarang = checkBarang(arr_barang, id); 
+		if (indexBarang === false)
 		{
 			arr_barang.push({
 				'id' : id,
@@ -237,12 +287,18 @@ th, td {
 				'harga' : harga,
 				'satuan' : satuan
 			});
-			
-			populate_table(arr_barang, content_barang);
+
+
+		} else {
+			arr_barang[indexBarang].jumlah = jumlah	;
+			arr_barang[indexBarang].harga = harga	;
+
 		}
+		populate_table(arr_barang, content_barang);
 
 		$('#select-barang').focus();
 	});
+
 
 	function checkBarang(data, id)
 	{
@@ -260,30 +316,8 @@ th, td {
 	var populate_table = function (data, content_barang)
 	{
 		empty_table(content_barang);
-		$.each(data.reverse(), function(index, val) {
-			// var noPage = data.length - index;
-			// var tr = $("<tr>");
-			// var td_no = $("<td class=\"text-center\">"+noPage+"</td>");
-			// var td_nama = $("<td>"+val.nama+"</td>");
-			// // var input_jumlah = $("<input type=\"hidden\" name=\"val_jumlah[]\" value=\""+val.jumlah+"\">");
-			// var input_id = $("<input type=\"hidden\" name=\"val_id[]\" value=\""+val.id+"\">");
-			// var td_satuan = $("<td class=\"text-center\">"+val.satuan+"</td>");
-			// var td_jumlah = $("<td class=\"text-center\"><input type=\"text\" name=\"val_jumlah[]\" value=\""+val.jumlah+"\" class=\"form-control\"></td>");
-			// var td_harga = $("<td class=\"text-center\"><input type=\"text\" name=\"val_harga[]\" value=\""+val.harga+"\" class=\"form-control\"></td>");
-			// var td_action = $("<td class=\"text-center\"><button data-id_jabatan=\""+val.id+"\" type=\"button\" class=\"btn btn-danger btn-hapus-jabatans\">Hapus</button></td>");
-			// td_action.click(function(event) {
-			// 	arr_barang.splice(index, 1);	
-			// 	populate_table(arr_barang, content_barang);			
-			// });
-			// tr.append(input_id);
-			// // tr.append(input_jumlah);
-			// tr.append(td_no);
-			// tr.append(td_nama);
-			// tr.append(td_satuan);
-			// tr.append(td_jumlah);
-			// tr.append(td_harga);
-			// tr.append(td_action);
-			// content_barang.append(tr);
+		$.each(data, function(index, val) {
+
 
 			var noPage = data.length - index;
 			var tr = $("<tr/>");
@@ -303,13 +337,28 @@ th, td {
 
 			}))
 			.append($("<td/>", {
-				html : "<input type=\"text\" name=\"val_jumlah[]\" value=\""+val.jumlah+"\" class=\"form-control\">",
 				class : 'text-center'
-			}))
+			})
+			.append($("<input/>", {
+				type : 'text',
+				name : 'val_jumlah[]',
+				value : val.jumlah,
+				class : 'form-control',
+				readonly : true,
+			})
+			)
+			)
 			.append($("<td/>", {
-				html : "<input type=\"text\" name=\"val_harga[]\" value=\""+val.harga+"\" class=\"form-control\">",
 				class : 'text-center'
-			}))
+			})
+			.append($("<input/>", {
+				type : 'text',
+				name : 'val_harga[]',
+				value : val.harga,
+				class : 'form-control',
+				readonly : true,
+			})
+			))
 			.append($("<td/>", {
 				html : "<button data-id_jabatan=\""+val.id+"\" type=\"button\" class=\"btn btn-danger btn-hapus-jabatans\">Hapus</button>",
 				class : 'text-center'
@@ -323,8 +372,23 @@ th, td {
 				value : val.id
 			}));
 
-			content_barang.append(tr);
+			content_barang.prepend(tr);
 		});
+
+		let totalHarga = arr_barang.reduce((total, obj) => parseInt(obj.harga) + total,0);
+		let trFoot = $("<tr/>");
+		trFoot.append($("<td/>", {
+			text : 'Total Harga',
+			class : 'text-right',
+			colspan : 4,
+		}))
+		.append($("<td/>", {
+			text : convertToRupiah(totalHarga),
+			class : 'text-right',
+			
+		}))
+		;
+		content_barang.append(trFoot);
 
 	}
 

@@ -18,7 +18,6 @@
 @endsection
 
 @section('content')
-{{ Auth::user()->getRoleNames() }}
 @endsection
 
 @section('custom-js')

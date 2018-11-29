@@ -1,3 +1,7 @@
+@php
+$kota = 'Pekanbaru';
+$tanggal = indonesian_date(now(), 'j F Y');
+@endphp
 <html>
 <head>
 	<head>
@@ -9,6 +13,9 @@
 		.title {
 			text-align: center;
 			font-size: 18px;
+			font-weight: bolder;
+			text-transform: uppercase;
+			letter-spacing: 1px;
 		}
 		.table {
 			border-spacing: 0;
@@ -19,6 +26,14 @@
 			white-space: nowrap;
 			border: 1px solid;
 			padding: 5px;
+		}
+		#table-footer {
+			float: right;
+			margin-top: 30px;
+		}
+
+		#table-footer tr, #table-footer td {
+			border: none;
 		}
 
 	</style>
@@ -56,5 +71,21 @@
 			</tr>
 		</tbody>
 	</table>
+		<table id="table-footer">
+		<tr>
+			<td>{{ "$kota, $tanggal" }}</td>
+		</tr>
+		<tr>
+			<td style="padding: 25px 0;"></td>
+		</tr>
+		<tr>
+			<td class="text-center">
+				{{ strtoupper(Auth::user()->name) }}
+			</td>
+		</tr>
+	</table>
+	<script>
+		
+	</script>
 </body>
 </html>

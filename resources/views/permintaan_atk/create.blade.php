@@ -60,12 +60,12 @@ th, td {
 								<select style="" id="select-barang" class="form-control">
 									<option value="">---- Pilih ATK ----</option>
 									@foreach ($barangs as $barang)
-									<option data-satuan="{{ $barang->satuan }}" value="{{ $barang->id }}">{{ $barang->nama }}</option>
+									<option data-satuan="{{ $barang->satuan }}" value="{{ $barang->id }}">{{ ($barang->nama) }}</option>
 									@endforeach
 								</select>
 							</td>
 							<td class="col-xs-2">
-								<input id="jumlah" maxlength="5" type="text" class="form-control">
+								<input id="jumlah" maxlength="5" type="number" class="form-control">
 							</td>
 							<td class="col-xs-2">
 								<button id="btn-tambah-barang" class="btn btn-block btn-info" type="button">+</button>

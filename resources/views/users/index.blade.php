@@ -83,6 +83,8 @@ th, td {
 @section('custom-js')
 
 <script>
-  let tableUser = $("#table-user").DataTable();
+  let tableUser = $("#table-user").DataTable({
+    order : [],
+  });
 </script>
 @endsection

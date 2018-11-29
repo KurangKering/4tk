@@ -1,4 +1,4 @@
-   <div id="modal-custom">
+   <div id="modal-custom" style="display: none;">
     <div class="box">
       <div id="error-message">
 

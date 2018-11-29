@@ -129,6 +129,18 @@ th, td {
 	$('#btn-cetak').click(function(e) {
 		var bulan = $('#bulan').val();
 		var tahun = $('#tahun').val();
+		if (!tahun || !bulan ) {
+			swal({
+				icon : 'warning',
+				title : 'Gagal !',
+				text : 'Harap Periksa Tahun dan Bulan',
+				buttons : false,
+				closeOnClickOutside : false,
+				timer : 1000,
+
+			});
+			return;
+		}
 		location.href = ("{{ url('laporan/front_opname') }}"+"?bulan="+bulan+"&tahun="+tahun);
 	});
 
@@ -150,5 +162,5 @@ th, td {
 		}
 		]
 	});
-	</script>
-	@endsection
+</script>
+@endsection

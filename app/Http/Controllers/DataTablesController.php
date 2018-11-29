@@ -125,7 +125,7 @@ class DataTablesController extends Controller
 		return DataTables::of($barangs)
 		->addColumn('action', function($atk) use($isDisabled, $usedAtkID) {
 			$disDelt = in_array($atk->id, $usedAtkID) ? 'disabled' : '';
-			$button = '<button type="button" disabled class="btn btn-block">disabled</button>';
+			$button = '-';
 			if (!$isDisabled) {
 				$button = 	"<button type=\"button\" onclick=\"show_modal('$atk->id')\" class=\"btn btn-info\">Edit</button>";
 				$button .= " ";

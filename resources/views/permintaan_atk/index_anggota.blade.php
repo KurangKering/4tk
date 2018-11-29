@@ -101,10 +101,20 @@ th, td {
 			icon : 'warning',
 			title : 'Hapus Permintaan',
 			text : 'Apakah Anda Yakin Ingin Menghapus Permintaan ?',
-			buttons : true,
+			closeOnClickOutside : false,
+			buttons : {
+				n : {
+					text : 'Batal',
+					className : 'btn btn-default',
+				},
+				y : {
+					text : 'Hapus',
+					className : 'btn btn-danger'
+				} 
+			},
 		})
 		.then(clicked => {
-			if (clicked) 
+			if (clicked == 'y') 
 			{
 				axios.post("{{ route('permintaan_atk.index') }}" + "/" + id, {
 					_method : "DELETE",

@@ -1,4 +1,4 @@
-  <div id="modal-user">
+  <div id="modal-user" style="display: none;">
     <div class="box">
       <div class="box-body">
         <div id="error-message">
@@ -60,7 +60,7 @@
   </div>
 </div>
 
-<div id="modal-detail">
+<div id="modal-detail" style="display: none;">
   <div class="box">
     <div class="box-header"></div>
     <div class="box-body">

@@ -1,4 +1,4 @@
-  <div id="modal-detail">
+  <div id="modal-detail" style="display: none;">
     <div class="box">
 
       <div class="box-body">
