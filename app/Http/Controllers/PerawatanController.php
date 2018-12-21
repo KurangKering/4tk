@@ -214,7 +214,7 @@ class PerawatanController extends Controller
      */
     public function showPerawatan(Request $request, $id)
     {
-        $perawatan = Perawatan::where('status', '2')->with('det_perawatan.mst_barang', 'subbidang', 'user')->findOrFail($id);
+        $perawatan = Perawatan::with('det_perawatan.mst_barang', 'subbidang', 'user')->findOrFail($id);
 
         $perawatan->tanggal_manusia_pengajuan = indonesian_date($perawatan->tanggal_pengajuan);
         $perawatan->tanggal_manusia_perawatan = indonesian_date($perawatan->tanggal_perawatan);

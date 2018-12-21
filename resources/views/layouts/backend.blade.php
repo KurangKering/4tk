@@ -28,10 +28,10 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <style>
-  .html5buttons {
-    float: right;
-    margin-left: 5px;
-  }
+.html5buttons {
+  float: right;
+  margin-left: 5px;
+}
 </style>
 @yield('custom-css')
 
@@ -43,7 +43,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
   <div class="wrapper">
     <header class="main-header">
       <a href="{{ asset('templates/adminlte/index2.html') }}" class="logo">
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini"><b>A</b>TK</span>
         <span class="logo-lg"><b>ATK</b></span>
       </a>
       <nav class="navbar navbar-static-top">
@@ -58,33 +58,31 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('templates/adminlte/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                <img src="{{ asset('templates/adminlte/dist/img/avatar5.png') }}" class="user-image" alt="User Image">
                 <span class="hidden-xs">{{  Auth::user()->name  }}</span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
-                  <img src="{{ asset('templates/adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                  <img src="{{ asset('templates/adminlte/dist/img/avatar5.png') }}" class="img-circle" alt="User Image">
                   <p>{{  Auth::user()->name  }}
                     <p>
-                      <small>{{  Auth::user()->subbidang['nama'] ?? '-' }}</small>
+                      <small>{{   Auth::user()->subbidang['nama'] ?? '-' }}</small>
                     </p>
                   </li>
 
                   <li class="user-footer">
-                    <div class="pull-left">
+                    {{-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
-                      onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                      {{ __('Logout') }}
-                    </a>
+                    </div> --}}
+                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                  </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf
-                    </form>
-                  </div>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
                 </li>
               </ul>
             </li>
@@ -97,13 +95,13 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
       <section class="sidebar">
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="{{ asset('templates/adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+            <img src="{{ asset('templates/adminlte/dist/img/avatar5.png') }}" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
-            <p>{{  Auth::user()->name  }}
+            <p>{{  ucwords(Auth::user()->name)  }}
             </p>
             <a href="#"><i class="fa fa-circle text-success"></i> 
-              {{  implode(Auth::user()->getRoleNames()->toArray())  }}
+              {{  ucwords(implode(Auth::user()->getRoleNames()->toArray()))  }}
             </a>
           </div>
         </div>
@@ -124,7 +122,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
       </div>
       <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
       reserved.
-     --}}</footer>
+    --}}</footer>
     <script src="{{ asset('templates/adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('templates/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     {{-- <script src="{{ asset('templates/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script> --}}
